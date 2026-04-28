@@ -29,7 +29,10 @@
   <div class="page-shell">
     <header class="topbar">
       <p class="topbar-copy">Una carta hecha con todo mi corazon</p>
-      <a class="topbar-link" href="#carta">Leer mi mensaje</a>
+      <div class="topbar-actions">
+        <button class="topbar-link topbar-link-secondary" type="button" data-open-private>Nuestro rincon</button>
+        <a class="topbar-link" href="#carta">Leer mi mensaje</a>
+      </div>
     </header>
 
     <main>
@@ -44,6 +47,7 @@
 
           <div class="hero-actions">
             <a class="button button-primary" href="#promesas">Mis promesas para ti</a>
+            <button class="button button-secondary button-private" type="button" data-open-private>Entrar a nuestro rincon</button>
             <button class="button button-secondary" type="button" data-open-note>Un detalle para ti</button>
           </div>
 
@@ -245,6 +249,102 @@
         Eres una bendicion en mi vida y quiero seguir haciendote sentir especial todos los dias.
       </p>
     </article>
+  </div>
+
+  <div class="private-panel" id="privatePanel" aria-hidden="true">
+    <div class="private-backdrop" data-close-private></div>
+    <section class="private-sheet" role="dialog" aria-modal="true" aria-labelledby="privateTitle">
+      <header class="private-head">
+        <div class="private-intro">
+          <p class="eyebrow">Solo para nosotros</p>
+          <h2 id="privateTitle">Nuestro rincon bonito, nuestro presente y el futuro que quiero construir contigo.</h2>
+          <p>
+            Este apartado se abre aparte porque hay sentimientos, recuerdos y promesas que quiero guardar
+            como si fueran un lugar especial solo para ti y para mi.
+          </p>
+        </div>
+
+        <button class="private-close" type="button" data-close-private>Cerrar</button>
+      </header>
+
+      <div class="private-grid">
+        <div class="memory-column">
+          <div class="memory-collage">
+            <article class="memory-frame memory-frame-main">
+              <img
+                src="assets/images/our-photo.jpeg"
+                alt="Foto de nosotros abrazados frente al espejo"
+              >
+              <span class="memory-tag">Mi lugar favorito eres tu</span>
+            </article>
+
+            <article class="memory-frame memory-frame-side">
+              <img
+                src="assets/images/our-photo.jpeg"
+                alt="Nuestra foto enmarcada como recuerdo especial"
+              >
+            </article>
+
+            <article class="memory-note">
+              <p class="card-kicker">Lo que veo cuando nos miro</p>
+              <p>
+                Veo amor, complicidad, apoyo y una historia que apenas esta empezando a mostrar
+                todo lo bonito que puede llegar a ser.
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <article class="future-letter">
+          <p class="card-kicker">Carta para nuestro amor</p>
+          <h3>Lo nuestro no solo me hace feliz ahora, tambien me ilusiona por todo lo que nos espera.</h3>
+          <p>
+            Cuando pienso en nosotros, no pienso solamente en lo lindo que se siente abrazarte, reirme contigo
+            o quedarme tranquilo sabiendo que existes. Pienso tambien en lo afortunado que soy de compartir mi
+            tiempo con una persona que me inspira a querer un amor serio, bonito y con futuro. Lo que tenemos
+            me hace creer mucho mas en la fuerza de una relacion que se cuida, se respeta y se elige de verdad.
+          </p>
+          <p>
+            Me gusta imaginar todo lo que podemos seguir construyendo juntos: mas recuerdos, mas metas cumplidas,
+            mas conversaciones sinceras, mas dias tranquilos en los que sintamos que estamos avanzando de la mano.
+            Yo no quiero un amor pasajero contigo; quiero una historia que siga creciendo con paciencia, con esfuerzo
+            y con ese carino profundo que hace que dos personas se conviertan en equipo.
+          </p>
+          <p>
+            Quiero acompanarte en tus suenos, celebrar tus logros, cuidarte cuando te sientas cansada y recordarte
+            siempre lo mucho que vales. Tambien quiero que construyamos objetivos nuestros, metas que nos emocionen
+            y planes que algun dia podamos mirar atras y decir: todo esto lo logramos juntos, paso a paso, con amor
+            y con la certeza de que valia la pena luchar por lo nuestro.
+          </p>
+          <p>
+            Si el futuro nos regala desafios, quiero enfrentarlos contigo. Si el futuro nos regala oportunidades,
+            quiero aprovecharlas a tu lado. Y si el futuro nos regala mas tiempo para amarnos, entonces quiero usarlo
+            para seguir demostrandote que contigo no solo me siento enamorado, sino tambien comprometido con la idea
+            de construir una vida llena de paz, metas bonitas y momentos que nos hagan sentir orgullosos del amor
+            que estamos formando.
+          </p>
+
+          <div class="future-goals">
+            <article class="goal-card">
+              <span>Metas</span>
+              <p>Seguir creciendo, apoyarnos y convertir nuestros planes en realidades bonitas.</p>
+            </article>
+
+            <article class="goal-card">
+              <span>Futuro</span>
+              <p>Tener una relacion cada vez mas fuerte, madura y llena de confianza.</p>
+            </article>
+
+            <article class="goal-card">
+              <span>Nosotros</span>
+              <p>No perder nunca la ternura, la admiracion y las ganas de elegirnos todos los dias.</p>
+            </article>
+          </div>
+
+          <span class="signature">Con ganas de vivir mil cosas lindas contigo.</span>
+        </article>
+      </div>
+    </section>
   </div>
 
   <script src="script.js"></script>
