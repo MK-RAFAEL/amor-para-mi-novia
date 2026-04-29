@@ -740,6 +740,10 @@ button {
   transform: rotate(-2deg);
 }
 
+.memory-frame-main img {
+  object-position: center center;
+}
+
 .memory-frame-side {
   width: min(78%, 290px);
   margin-left: auto;
@@ -748,7 +752,7 @@ button {
 
 .memory-frame-side img {
   aspect-ratio: 5 / 6;
-  object-position: center 30%;
+  object-position: center 28%;
 }
 
 .memory-tag {
