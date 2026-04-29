@@ -40,6 +40,10 @@ body {
   overflow-x: hidden;
 }
 
+body.access-pending {
+  overflow: hidden;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -61,6 +65,96 @@ button {
   width: var(--container);
   margin: 0 auto;
   padding: 1rem 0 2rem;
+}
+
+body.access-pending .page-shell,
+body.access-pending .floating-hearts,
+body.access-pending .note-modal,
+body.access-pending .private-panel {
+  visibility: hidden;
+}
+
+.access-gate {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at top left, rgba(255, 167, 192, 0.38), transparent 30%),
+    linear-gradient(180deg, rgba(96, 20, 46, 0.94), rgba(67, 14, 33, 0.96));
+  z-index: 60;
+}
+
+body:not(.access-pending) .access-gate {
+  display: none;
+}
+
+.access-gate-panel {
+  width: min(100%, 680px);
+  padding: clamp(1.4rem, 4vw, 2rem);
+  border-radius: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 249, 251, 0.95);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+}
+
+.access-gate-panel h1 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.access-copy,
+.access-status {
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+.access-copy {
+  margin: 1rem 0 0;
+}
+
+.access-form {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.access-label {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.access-input {
+  width: 100%;
+  min-height: 56px;
+  padding: 0.95rem 1rem;
+  color: var(--text-main);
+  border: 1px solid rgba(198, 61, 95, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  outline: none;
+}
+
+.access-input:focus {
+  border-color: rgba(229, 57, 99, 0.5);
+  box-shadow: 0 0 0 4px rgba(229, 57, 99, 0.12);
+}
+
+.access-submit {
+  width: 100%;
+}
+
+.access-status {
+  margin: 0.9rem 0 0;
+  min-height: 1.7em;
+}
+
+.access-status.is-error {
+  color: #bf1f49;
 }
 
 .floating-hearts {
@@ -993,6 +1087,10 @@ button {
   .hero-copy h1 {
     max-width: none;
     font-size: clamp(2.7rem, 16vw, 4.2rem);
+  }
+
+  .access-gate-panel h1 {
+    font-size: clamp(2.1rem, 12vw, 3.3rem);
   }
 
   .hero-visual {

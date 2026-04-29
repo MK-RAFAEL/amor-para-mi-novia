@@ -1,18 +1,78 @@
+const ACCESS_PARAM = "access";
+const ACCESS_HASH =
+  "3ff561239f3dcce343fba3c51c4f5e1b6bb89e28b211a137aff5f17f479e9c15";
+
 const revealElements = document.querySelectorAll(".reveal");
 const quotePanels = document.querySelectorAll(".quote-panel");
 const noteModal = document.getElementById("noteModal");
 const privatePanel = document.getElementById("privatePanel");
+const accessGate = document.getElementById("accessGate");
+const accessForm = document.getElementById("accessForm");
+const accessInput = document.getElementById("accessInput");
+const accessStatus = document.getElementById("accessStatus");
 const openNoteButton = document.querySelector("[data-open-note]");
 const closeNoteButtons = document.querySelectorAll("[data-close-note]");
 const openPrivateButtons = document.querySelectorAll("[data-open-private]");
 const closePrivateButtons = document.querySelectorAll("[data-close-private]");
+
+const getSearchAccess = () => {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(ACCESS_PARAM)?.trim() || "";
+};
+
+const hashText = async (value) => {
+  const buffer = await window.crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(value)
+  );
+
+  return [...new Uint8Array(buffer)]
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+};
+
+const setAccessMessage = (message, isError = false) => {
+  if (!accessStatus) {
+    return;
+  }
+
+  accessStatus.textContent = message;
+  accessStatus.classList.toggle("is-error", isError);
+};
+
+const unlockSite = () => {
+  document.body.classList.remove("access-pending");
+
+  if (accessGate) {
+    accessGate.setAttribute("aria-hidden", "true");
+  }
+};
+
+const lockSite = () => {
+  document.body.classList.add("access-pending");
+
+  if (accessGate) {
+    accessGate.setAttribute("aria-hidden", "false");
+  }
+};
+
+const validateAccess = async (rawValue) => {
+  if (!rawValue) {
+    return false;
+  }
+
+  const hashedValue = await hashText(rawValue);
+  return hashedValue === ACCESS_HASH;
+};
 
 const syncBodyScroll = () => {
   const hasOpenOverlay = [noteModal, privatePanel].some(
     (element) => element && element.classList.contains("is-visible")
   );
 
-  document.body.style.overflow = hasOpenOverlay ? "hidden" : "";
+  document.body.style.overflow = hasOpenOverlay || document.body.classList.contains("access-pending")
+    ? "hidden"
+    : "";
 };
 
 if (revealElements.length) {
@@ -115,3 +175,44 @@ document.addEventListener("keydown", (event) => {
     toggleModal(false);
   }
 });
+
+if (accessForm && accessInput) {
+  accessForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const submittedValue = accessInput.value.trim();
+    const isValid = await validateAccess(submittedValue);
+
+    if (!isValid) {
+      setAccessMessage("Clave invalida. Usa el enlace privado completo.", true);
+      accessInput.focus();
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.set(ACCESS_PARAM, submittedValue);
+    window.location.replace(url.toString());
+  });
+}
+
+const initializeAccess = async () => {
+  const accessValue = getSearchAccess();
+  const isValid = await validateAccess(accessValue);
+
+  if (isValid) {
+    unlockSite();
+    syncBodyScroll();
+    return;
+  }
+
+  lockSite();
+  syncBodyScroll();
+  setAccessMessage("Acceso bloqueado. Solo entra quien tenga el enlace privado.", true);
+
+  if (accessInput) {
+    accessInput.value = "";
+    accessInput.focus();
+  }
+};
+
+initializeAccess();

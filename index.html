@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Para Ti, Mi Amor</title>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="referrer" content="no-referrer">
   <meta
     name="description"
     content="Una pagina romantica con mensajes de amor profundo, palabras bonitas y detalles visuales dedicados a una persona muy especial."
@@ -16,7 +18,7 @@
   >
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="access-pending">
   <div class="floating-hearts" aria-hidden="true">
     <span></span>
     <span></span>
@@ -24,6 +26,32 @@
     <span></span>
     <span></span>
     <span></span>
+  </div>
+
+  <div class="access-gate" id="accessGate" aria-hidden="true">
+    <div class="access-gate-panel">
+      <p class="eyebrow">Acceso privado</p>
+      <h1>Esta pagina solo abre con el enlace completo que tu compartas.</h1>
+      <p class="access-copy">
+        Si entraste sin el enlace privado, el contenido queda bloqueado. Si tienes la clave,
+        puedes pegarla aqui para abrir la pagina.
+      </p>
+
+      <form class="access-form" id="accessForm">
+        <label class="access-label" for="accessInput">Clave de acceso</label>
+        <input
+          class="access-input"
+          id="accessInput"
+          name="access"
+          type="password"
+          autocomplete="off"
+          placeholder="Pega aqui la clave privada"
+        >
+        <button class="button button-primary access-submit" type="submit">Entrar</button>
+      </form>
+
+      <p class="access-status" id="accessStatus">Esperando una clave valida.</p>
+    </div>
   </div>
 
   <div class="page-shell">
